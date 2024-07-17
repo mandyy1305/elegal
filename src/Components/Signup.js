@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import api from "../Authentication/apiAddress";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,17 +13,31 @@ const Signup = () => {
   const [errorObject, setErrorObject] = useState({});
 
   const [fullName, setFullName] = useState("");
-  const [handle, setHandle] = useState("");
+  const [handle, setHandle] = useState(""); // TODO: Handle is username
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // const handleSubmit = (e) => {
-    
-  // };
+  const handleSignUp = () => {
+    const auth = getAuth();
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+
+        // TODO: Add username to the database
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
 
   return (
-    <div className="h-full w-full bg-bluebg  rounded-b-3xl relative rounded-l-3xl">
+    <div className="h-full bg-bluebg w-[550px] mx-auto mt-32  rounded-b-3xl relative rounded-l-3xl pb-4">
       {Object.keys(errorObject).length === 0 ? (
         <div></div>
       ) : (
@@ -56,7 +71,7 @@ const Signup = () => {
         <form>
           <div className="w-full mx-auto ">
             <div className=" mx-auto w-10/12 md:w-8/12 mt-8 ">
-              <label className="text-white text-lg">
+              {/* <label className="text-white text-lg">
                 Full Name
                 <br />
               </label>
@@ -66,7 +81,7 @@ const Signup = () => {
                 onChange={(e) => {
                   setFullName(e.target.value);
                 }}
-              />
+              /> */}
               <br />
               <label className="text-white text-lg">
                 Username
@@ -103,18 +118,6 @@ const Signup = () => {
                 }}
               />
               <br />
-              <label className="text-white  text-lg">
-                Confirm Password
-                <br />
-              </label>
-              <input
-                type="password"
-                className="w-full h-8 rounded-sm outline-none hover:ring-1 focus:ring-2 focus:ring-white  hover:ring-white bg-slate-200 p-2  mb-3 "
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
-              />
-              <br />
             </div>
           </div>
           <div className="flex justify-center mt-6 h-10    ">
@@ -124,7 +127,9 @@ const Signup = () => {
               className={`bg-white text-sky-600 text-xl font-bold w-4/12 md:w-3/12 rounded-md ${
                 cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
               }`}
-              
+              onClick={() => {
+                handleSignUp();
+              }}
             />
           </div>
         </form>

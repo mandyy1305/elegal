@@ -18,7 +18,6 @@ import NotFound404 from "./Components/NotFound404";
 import ProvidersDash from "./Components/ProviderDashboard/ProvidersDash";
 
 import Signinup from "./Components/Signinup";
-import jwtDecode from "jwt-decode";
 
 //checking for authorization
 
@@ -31,6 +30,8 @@ import Appointment from "./Components/ProviderDashboard/Appointment";
 import AppointmentRequest from "./Components/ProviderDashboard/AppointmentRequest";
 import RequestAppointment from "./Components/RequestAppointment";
 import AppointmentHistory from "./Components/ProviderDashboard/AppointmentHistory";
+import Signin from "./Components/Signin";
+import Signup from "./Components/Signup";
 function App() {
   return (
     <div className="flex flex-col w-full">
@@ -102,8 +103,8 @@ function App() {
             />
           }
         />
-        <Route path="/signin" element={<Signinup a={true} b={false} />} />
-        <Route path="/signup" element={<Signinup a={false} b={true} />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/providerRegister" element={<RegisterProvider />} />
         <Route path="/UserSelection" element={<UserSelection />} />
         <Route path="/clientRegister" element={<Registerclient />} />

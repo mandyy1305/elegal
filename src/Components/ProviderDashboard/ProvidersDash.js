@@ -10,7 +10,6 @@ import Calender from "../Calendar";
 import { Link } from "react-router-dom";
 
 const ProvidersDash = () => {
-
   // let arrPendingName = [];
   const [arrName, setArrName] = useState("");
   // let arrPendingSubject = [];
@@ -21,19 +20,13 @@ const ProvidersDash = () => {
   // let arrAcceptedDescription = [];
   // const [requestData, setRequestData] = useState({});
   // const [abc, setAbc] = useState(0);
-  
-  
-
-  
-
-
 
   // const parseUserData =()=>{
   //   const docData = JSON.parse(localStorage.getItem("UserDetails"))
   //   console.log(docData)
   //   JSON.parse(localStorage.getItem("UserDetails")).providerInformation.providerPersonalInfo.providerFullName
   //     return docData.providerInformation.providerPersonalInfo.providerFullName
-    
+
   // }
 
   return (
@@ -51,7 +44,7 @@ const ProvidersDash = () => {
             />
             <div className="bg-white w-full flex flex-col justify-center">
               <div className=" text-2xl text-center font-bold">
-                Good Day Mr. {JSON.parse(localStorage.getItem("UserDetails")).providerInformation.providerPersonalInfo.providerFullName}{" "}
+                Good Day Mr.
               </div>
               <div className="text-slate-700 text-center text-[15px] font-semibold">
                 Have a Nice Day !
@@ -62,35 +55,23 @@ const ProvidersDash = () => {
             <div className="bg-blue-800 w-full h-12 hidden md:flex rounded-t-lg text-lg font-semibold text-gray-200 p-2 pl-4">
               Profile
             </div>
-            <DashProfile
-            
-              img="https://shorturl.at/uHKT3"
-              name={JSON.parse(localStorage.getItem("UserDetails")).providerInformation.providerPersonalInfo.providerFullName}
-              num={JSON.parse(localStorage.getItem("UserDetails")).providerInformation.providerPersonalInfo.providerContact}
-              email={JSON.parse(localStorage.getItem("UserDetails")).providerInformation.providerPersonalInfo.providerEmail}
-            />
+            <DashProfile img="https://shorturl.at/uHKT3" />
           </div>
         </div>
         <div className=" h-3/5 py-2 px-3 mx-3 flex flex-col md:flex-row md:justify-evenly md:pr-6">
           <div className="bg-white rounded-lg shadow-md shadow-slate-300  md:w-96">
-          <Link to = "/AppRequest"><div className="bg-blue-800 w-full p-2 pl-4 h-12 rounded-t-lg text-lg font-semibold text-gray-200">
-              Appointment Requests
-            </div></Link>
+            <Link to="/AppRequest">
+              <div className="bg-blue-800 w-full p-2 pl-4 h-12 rounded-t-lg text-lg font-semibold text-gray-200">
+                Appointment Requests
+              </div>
+            </Link>
             <div className="overflow-auto flex flex-col h-72 scrollbar-hide mt-2">
-            {Object.keys(JSON.parse(localStorage.getItem("requestData"))).map((key, index) => (
-              //console.log("key : " + (new Date(JSON.parse(localStorage.getItem("requestData"))[key].date._seconds * 1000 ).toString()))
-                  <DashUpcomingApntmnt
-                  img="https://shorturl.at/zQZ03"
-                  
-                  name={JSON.parse(localStorage.getItem("requestData"))[key].caseDetails.fullName}
-                  case={JSON.parse(localStorage.getItem("requestData"))[key].caseDetails.subject}
-                  
-                  date={(new Date(JSON.parse(localStorage.getItem("requestData"))[key].date._seconds * 1000 ).toString().slice(0, -30))}
-                  time="2:00 PM"
-                />
-
-              ))}
-
+              {Object.keys(JSON.parse(localStorage.getItem("requestData"))).map(
+                (key, index) => (
+                  //console.log("key : " + (new Date(JSON.parse(localStorage.getItem("requestData"))[key].date._seconds * 1000 ).toString()))
+                  <DashUpcomingApntmnt img="https://shorturl.at/zQZ03" />
+                )
+              )}
             </div>
           </div>
           <div className=" bg-white mt-4 md:mt-0 rounded-lg shadow-lg shadow-slate-300 md:w-96 ">
@@ -98,8 +79,6 @@ const ProvidersDash = () => {
               Upcoming Appointments
             </div>
             <div className="overflow-auto flex flex-col h-72 scrollbar-hide mt-2">
-              
-
               <DashUpcomingApntmnt
                 img="https://shorturl.at/zQZ03"
                 name={arrName[0]}

@@ -1,9 +1,10 @@
-import axios from "axios";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import app from "../firebaseConfig";
 const Signin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -12,17 +13,29 @@ const Signin = () => {
   const [cursorLoading, setCursorLoading] = useState(false);
   const [errorObject, setErrorObject] = useState({});
 
-  // const handleLogin = (e) => {
-    
-  // };
+  const handleSignIn = () => {
+    const auth = getAuth();
+    console.log(auth);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorObject({ errorCode, errorMessage });
+        console.log(errorCode, errorMessage);
+      });
+  };
 
   return (
-    <div className="h-full w-full flex flex-col relative justify-betwen bg-bluebg rounded-b-3xl rounded-r-3xl">
+    <div className="h-full w-[550px] mx-auto flex flex-col relative justify-betwen bg-bluebg rounded-b-3xl rounded-r-3xl mt-28">
       {Object.keys(errorObject).length === 0 ? (
         <div></div>
       ) : (
-        <div className="error bg-red-600 text-white rounded-sm w-60 flex absolute mb-8 top-0 z-50 left-0 mx-auto right-0 justify-center text-center">
-        </div>
+        <div className="error bg-red-600 text-white rounded-sm w-60 flex absolute mb-8 top-0 z-50 left-0 mx-auto right-0 justify-center text-center"></div>
       )}
       <div className="mt-12 text-3xl justify-center flex font-bold text-white">
         <p>Welcome Back!</p>
@@ -65,10 +78,13 @@ const Signin = () => {
             <input
               type="button"
               value="Sign In"
-              className={`bg-white text-sky-600 text-xl font-bold w-3/12 rounded-md pb-1 ${
+              className={`bg-white text-sky-600 text-xl font-bold w-3/12 rounded-md pb-1 h-8 mb-4 ${
                 cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
               }`}
-              
+              onClick={() => {
+                // setCursorLoading(true);
+                handleSignIn();
+              }}
             />
           </div>
         </form>

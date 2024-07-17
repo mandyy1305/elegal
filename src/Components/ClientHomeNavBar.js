@@ -10,6 +10,7 @@ import { useState } from "react";
 import ProfileDropdown from "./ProfileDropdown";
 import SideNav from "./SideNav/SideNav";
 import useBodyScrollLock from "./useBodyScrollLock";
+import { getAuth, signOut } from "firebase/auth";
 
 const ClientHomeNavbar = () => {
   const [profileDropdownVisible, setProfileDropdownVisibility] =
@@ -67,8 +68,24 @@ const ClientHomeNavbar = () => {
             NAV1
           </div>
         </div>
-        <div className="account w-1/4 relative h-full  flex justify-center items-center flex-col space-x-8">
-          
+        <div className="account w-1/4 relative h-full  flex justify-center items-center flex-col">
+          <Link
+            to="/signin"
+            className="border-2 rounded-full w-24 flex justify-center"
+          >
+            Sign In
+          </Link>
+          <button
+            className="border-2 rounded-full w-24"
+            onClick={() => {
+              const auth = getAuth();
+              signOut(auth).then(() => {
+                console.log("Signed Out");
+              });
+            }}
+          >
+            Log Out
+          </button>
         </div>
       </div>
     </div>
