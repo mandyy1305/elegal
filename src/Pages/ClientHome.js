@@ -10,29 +10,7 @@ import { useEffect } from "react";
 import fetchAvailability from "../Appointments/FetchData";
 
 const ClientHome = () => {
-  const clientOrProvider = () => {
-    //fetchAvailability();
-
-    let values = authentication();
-    if (values.authenticated) {
-      axios
-        .post(`${api}/user/whoishe`, { UID: values.decodedToken.user_id })
-        .then((data) => {
-          //setFetchedData(data.data.data.clientPersonalInfo)
-          localStorage.setItem("WhoIsHe", data.data.whoishe);
-          localStorage.setItem("UserDetails", JSON.stringify(data.data.UserDetails));
-        })
-        .catch((err) => {
-          console.log("sadge");
-        });
-    }
-  };
-  useEffect(() => {
-    fetchAvailability();
-    localStorage.setItem("requestData", "{}")
-    if (localStorage.getItem("WhoIsHe") === "") clientOrProvider();
-  }, []);
-
+  
   return (
     <div className="flex flex-col">
       <BgEllipse />
