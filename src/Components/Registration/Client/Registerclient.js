@@ -5,101 +5,7 @@ import api from "../../../Authentication/apiAddress";
 import jwtDecode from "jwt-decode";
 
 const Registerclient = () => {
-  const [fullName, setFullName] = useState();
-  const [contact, setContact] = useState();
-  const [email, setEmail] = useState();
-  const [dob, setDob] = useState();
-  const [languages, setLanguages] = useState();
-  const [gender, setGender] = useState();
-  const [address, setAddress] = useState();
 
-  const [cursorLoading, setCursorLoading] = useState(false);
-  const navigate = useNavigate()
-
-  const handleFullName = (e) => {
-    setFullName(e.target.value);
-    localStorage.setItem("clientFullName", e.target.value);
-  };
-  const handleContact = (e) => {
-    setContact(e.target.value);
-    localStorage.setItem("clientContact", e.target.value);
-  };
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-    localStorage.setItem("clientEmail", e.target.value);
-  };
-  const handleDob = (e) => {
-    setDob(e.target.value);
-    localStorage.setItem("clientDob", e.target.value);
-  };
-  const handleLanguages = (e) => {
-    setLanguages(e.target.value);
-    localStorage.setItem("clientLanguages", e.target.value);
-  };
-  const handleGender = (e) => {
-    setGender(e.target.value);
-    localStorage.setItem("clientGender", e.target.value);
-  };
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-    localStorage.setItem("clientAddress", e.target.value);
-  };
-
-  const handleSubmitDetails = () => {
-    let clientPersonalInfo = {
-      clientFullName: localStorage.getItem("clientFullName"),
-      clientContact: localStorage.getItem("clientContact"),
-      clientEmail: localStorage.getItem("clientEmail"),
-      clientDob: localStorage.getItem("clientDob"),
-      clientLanguages: localStorage.getItem("clientLanguages"),
-      clientGender: localStorage.getItem("clientGender"),
-      clientAddress: localStorage.getItem("clientAddress"),
-    };
-
-    //AXIOS PUSH TO DATABASE
-    let token =
-      localStorage.FBIdToken == null ? "Bearer " : localStorage.FBIdToken;
-    let UID = "";
-    if (token.split("Bearer ")[1]) {
-      let decodedToken = jwtDecode(token);
-      UID = decodedToken.user_id;
-    }
-    let bundledInfo = { UID, clientPersonalInfo };
-
-    axios
-      .post(`${api}/user/clientInformation`, bundledInfo)
-      .then(() => {
-        console.log("Successfully Uploaded");
-        deleteLocalStorage();
-        setCursorLoading(false);
-        navigate("/success")
-        window.location.reload();
-      })
-      .catch((err) => {
-        setCursorLoading(false);
-        console.log("Error", err);
-      });
-  };
-
-  const deleteLocalStorage = () => {
-    localStorage.removeItem("clientFullName");
-    localStorage.removeItem("clientContact");
-    localStorage.removeItem("clientEmail");
-    localStorage.removeItem("clientDob");
-    localStorage.removeItem("clientLanguages");
-    localStorage.removeItem("clientGender");
-    localStorage.removeItem("clientAddress");
-
-    localStorage.removeItem("clientOrProvider");
-    localStorage.removeItem("typeOfProvider");
-  };
-  const [file, setFile] = useState(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS5m7yIkq3oUIi8Gv31tfMsSN3FN_DpkVyEQ&usqp=CAU"
-  );
-  function handleChange(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-  }
 
   return (
     <div className="w-full h-full">
@@ -119,8 +25,6 @@ const Registerclient = () => {
                 <div className="value basis-7/12 ">
                   <input
                     className="rounded-md border-2 p-2 border-slate-700 h-8  sm:h-full w-full float-right"
-                    onChange={(e) => handleFullName(e)}
-                    value={localStorage.getItem("clientFullName")}
                   />
                 </div>
               </div>
@@ -136,8 +40,6 @@ const Registerclient = () => {
                     type="number"
                     pattern="[0-9]{10}"
                     className="rounded-md border-2 p-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                    onChange={(e) => handleContact(e)}
-                    value={localStorage.getItem("clientContact")}
                   />
                 </div>
               </div>
@@ -152,8 +54,6 @@ const Registerclient = () => {
                   <input
                     type="email"
                     className="rounded-md border-2 p-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                    onChange={(e) => handleEmail(e)}
-                    value={localStorage.getItem("clientEmail")}
                   />
                 </div>
               </div>
@@ -168,8 +68,7 @@ const Registerclient = () => {
                   <input
                     type="date"
                     className="rounded-md p-2 border-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                    onChange={(e) => handleDob(e)}
-                    value={localStorage.getItem("clientDob")}
+
                   />
                 </div>
               </div>
@@ -183,8 +82,6 @@ const Registerclient = () => {
                 <div className="value  basis-7/12 py-3 sm:py-0">
                   <input
                     className="rounded-md p-2 border-2 border-slate-700 h-8  w-full float-right sm:h-full"
-                    onChange={(e) => handleLanguages(e)}
-                    value={localStorage.getItem("clientLanguages")}
                   />
                 </div>
               </div>
@@ -198,8 +95,7 @@ const Registerclient = () => {
                 <div className="value  basis-7/12">
                   <select
                     className="rounded-md border-2 pl-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                    onChange={(e) => handleGender(e)}
-                    value={localStorage.getItem("clientGender")}
+
                   >
                     <option value="Gender">Gender</option>
                     <option value="Male">Male</option>
@@ -218,8 +114,6 @@ const Registerclient = () => {
                 <div className="value basis-7/12">
                   <textarea
                     className="rounded-md border-2 pl-2 border-slate-700 h-8 w-full float-right  sm:h-20 overflow-auto"
-                    onChange={(e) => handleAddress(e)}
-                    value={localStorage.getItem("clientAddress")}
                   />
                 </div>
               </div>
@@ -227,7 +121,7 @@ const Registerclient = () => {
             <div className="photo basis-4/12">
               <div className=" h-32 w-32 xl:h-36 xl:w-36 xl:mt-16 mx-auto flex">
                 <img
-                  src={file}
+                  // src={file}
                   height="100%"
                   width="100%"
                   className="mx-auto rounded-full"
@@ -245,7 +139,7 @@ const Registerclient = () => {
                 name="upploadbtn"
                 accept="image/*"
                 className="hidden"
-                onChange={handleChange}
+
               />
             </div>
           </div>
@@ -260,13 +154,7 @@ const Registerclient = () => {
             <input
               type="button"
               value="Register"
-              className={`bg-[#00183C] text-white w-5/12 h-10 text-xl font-bold md:w-24 md:ml-20 rounded-lg ${
-                cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
-              }`}
-              onClick={() => {
-                handleSubmitDetails();
-                setCursorLoading(true);
-              }}
+              className={`bg-[#00183C] text-white w-5/12 h-10 text-xl font-bold md:w-24 md:ml-20 rounded-lg `}
             />
           </div>
         </form>

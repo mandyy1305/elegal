@@ -134,7 +134,7 @@ const SearchArea = () => {
           </div>
           <div
             className="w-40 lg:w-48 h-16 bg-navbar flex justify-center items-center self-center rounded-xl text-white text-xl lg:mt-5 hover:cursor-pointer hover:shadow-xl"
-            onClick={() => navigate(`/${serviceProviderType}`)}
+            // onClick={() => navigate(`/${serviceProviderType}`)}
           >
             Find
           </div>

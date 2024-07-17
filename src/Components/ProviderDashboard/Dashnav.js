@@ -54,10 +54,6 @@ const Dashnav = () => {
       <div className=" flex justify-center">
         <div
           className="bg-white hover:-translate-y-0.5  drop-shadow-lg flex rounded-sm text-red-600 hover:bg-red-600 hover:text-white items-center space-x-1 h-8 w-24 md:mb-12 justify-center"
-          onClick={() => {
-            HandleSignOut();
-            naviagte("/");
-          }}
         >
           <BiPowerOff />
           <span>Logout</span>

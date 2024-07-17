@@ -2,51 +2,7 @@ import { useState } from "react";
 import Professionalinfo from "./Profesionalinfo";
 import { Link } from "react-router-dom";
 const Personalinfo =(props)=>{
-    let n = localStorage.getItem("fullnamesignup")
-    localStorage.setItem("providerFullName",n)
 
-    const [fullName, setFullName] = useState();
-    const [contact, setContact] = useState();
-    const [email, setEmail] = useState();
-    const [dob, setDob] = useState();
-    const [languages, setLanguages] = useState();
-    const [gender, setGender] = useState();
-    const [address, setAddress] = useState();
-
-    const handleFullName = (e) => {
-        setFullName(e.target.value)
-        localStorage.setItem("providerFullName", e.target.value)
-        
-    }
-    const handleContact = (e) => {
-        setContact(e.target.value)
-        localStorage.setItem("providerContact", e.target.value)
-    }
-    const handleEmail = (e) => {
-        setEmail(e.target.value)
-        localStorage.setItem("providerEmail", e.target.value)
-    }
-    const handleDob = (e) => {
-        setDob(e.target.value)
-        localStorage.setItem("providerDob", e.target.value)
-    }
-    const handleLanguages = (e) => {
-        setLanguages(e.target.value)
-        localStorage.setItem("providerLanguages", e.target.value)
-    }
-    const handleGender = (e) => {
-        setGender(e.target.value)
-        localStorage.setItem("providerGender", e.target.value)
-    }
-    const handleAddress = (e) => {
-        setAddress(e.target.value)
-        localStorage.setItem("providerAddress", e.target.value)
-    }
-    const [file, setFile] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS5m7yIkq3oUIi8Gv31tfMsSN3FN_DpkVyEQ&usqp=CAU");
-    function handleChange(e) {
-        console.log(e.target.files);
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
     return( 
 
         <div>
@@ -71,8 +27,6 @@ const Personalinfo =(props)=>{
                                 <div className="title  basis-4/12  "><label className="text-white font-bold text-md ">Full Name:</label></div>
                                 <div className="value basis-7/12 ">
                                 <input name="fullname" className="px-2 rounded-md border-2 border-slate-700 h-8  sm:h-full w-11/12 md:w-9/12 float-right"
-                                onChange={(e) => handleFullName(e)}
-                                value={localStorage.getItem("providerFullName")}
                                 /></div>
                             </div>
 
@@ -80,8 +34,6 @@ const Personalinfo =(props)=>{
                                 <div className="title  basis-4/12"><label className="text-white font-bold text-md ">Contact no:</label></div>
                                 <div className="value basis-7/12">
                                 <input name="fullname" type="number" className="px-2  rounded-md border-2 border-slate-700 h-8  w-11/12 md:w-9/12 float-right sm:h-full "
-                                onChange={(e) => handleContact(e)}
-                                value={localStorage.getItem("providerContact")}
                                 /></div>
                             </div>
 
@@ -89,8 +41,6 @@ const Personalinfo =(props)=>{
                                 <div className="title basis-4/12"><label className="text-white font-bold text-md">Email ID:</label></div>
                                 <div className="value  basis-7/12">
                                 <input name="fullname" type="email" className="px-2 rounded-md border-2 border-slate-700 h-8  w-11/12 md:w-9/12 float-right sm:h-full "
-                                onChange={(e) => handleEmail(e)}
-                                value={localStorage.getItem("providerEmail")}
                                 /></div>
                             </div>
 
@@ -98,8 +48,6 @@ const Personalinfo =(props)=>{
                                 <div className="title  basis-4/12"><label className="text-white font-bold text-md">Date of Birth:</label></div>
                                 <div className="value basis-7/12">
                                 <input type="date"name="fullname" className="px-2 rounded-md border-2 border-slate-700 h-8  w-11/12 md:w-9/12 float-right sm:h-full "
-                                onChange={(e) => handleDob(e)}
-                                value={localStorage.getItem("providerDob")}
                                 /></div>
                             </div>
 
@@ -107,8 +55,6 @@ const Personalinfo =(props)=>{
                                 <div className="title basis-4/12"><label className="text-white font-bold text-md">Language Spoken:</label></div>
                                 <div className="value  basis-7/12 py-3 sm:py-0">
                                 <input name="fullname" className="px-2 rounded-md border-2 border-slate-700 h-8  w-11/12 md:w-9/12 float-right sm:h-full"
-                                onChange={(e) => handleLanguages(e)}
-                                value={localStorage.getItem("providerLanguages")}
                                 /></div>
                             </div>
 
@@ -116,8 +62,6 @@ const Personalinfo =(props)=>{
                                 <div className="title  basis-4/12"><label className="text-white font-bold text-md">Gender:</label></div>
                                 <div className="value  basis-7/12">
                                 <select name="fullname" className="px-2 rounded-md border-2 border-slate-700 h-8  w-11/12 md:w-9/12 float-right sm:h-full "
-                                onChange={(e) => handleGender(e)}
-                                value={localStorage.getItem("providerGender")}
                                 >
                                 <option value="Gender">Gender</option>
                                 <option value="Male">Male</option>
@@ -130,25 +74,23 @@ const Personalinfo =(props)=>{
                                 <div className="title  basis-4/12"><label className="text-white font-bold text-md">Address:</label></div>
                                 <div className="value basis-7/12">
                                 <textarea name="fullname" className="px-2 rounded-md border-2 border-slate-700 h-auto w-11/12 md:w-9/12 float-right  sm:h-16"
-                                onChange={(e) => handleAddress(e)}
-                                value={localStorage.getItem("providerAddress")}
                                 /></div>
                             </div>
                         
                         </div>
                         <div className="photo basis-4/12 ">
                             <div className=" h-32 w-32 xl:h-36 xl:w-36 xl:mt-12 mx-auto flex">
-                            <img src={file} height="100%" width="100%" 
+                            <img src='' height="100%" width="100%" 
                             className="mx-auto rounded-full" id="profile_img"></img>
                             </div>
                             <label for="upload_img" className="flex justify-center"><span className=" mt-4 md:pt-1 rounded-sm   w-5/12 md:w-5/12 md:h-8  font-bold  bg-sky-400 flex justify-center">Select Image</span></label>
-                            <input type="file" id="upload_img" name="upploadbtn" accept="image/*" className="hidden" onChange={handleChange}/>
+                            <input type="file" id="upload_img" name="upploadbtn" accept="image/*" className="hidden" />
                         </div>
                     </div>
                     <div className="flex justify-center space-x-6 mt-12 mb-2">
                 <Link to = "/userselection"><input type="button" value="Back" className="bg-gray-300 border-2 border-slate-400 w-24 md:w-24 h-10 text-xl font-extrabold rounded-lg md:mr-20"
                 /></Link>
-                <input type="submit" onClick={() => props.nfun()} value="Next" className="bg-sky-300 border-2 border-slate-400 w-24 h-10 text-xl font-extrabold md:w-24 rounded-lg md::ml-20" />
+                <input type="submit"  value="Next" className="bg-sky-300 border-2 border-slate-400 w-24 h-10 text-xl font-extrabold md:w-24 rounded-lg md::ml-20" />
                 </div>
                 </form>
              </div>   

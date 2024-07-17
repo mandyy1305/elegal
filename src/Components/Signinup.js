@@ -28,20 +28,19 @@ const Signinup = (props) => {
         <div className="h-16 flex">
           <div
             className={`${color1} w-1/2 rounded-t-3xl text-3xl font-bold  flex justify-center align-middle hover:cursor-pointer pt-3`}
-            onClick={signIn}
+
           >
             Sign In
           </div>
           <div
             className={`${color2}  w-1/2 rounded-t-3xl text-3xl font-bold  flex justify-center align-middle pt-3 hover:cursor-pointer`}
-            onClick={signUp}
+
           >
             SignUp
           </div>
         </div>
         <div className="basis-11/12 rounded-b-3xl rounded-l-3xl">
-          {state && <Signin />}
-          {state2 && <Signup />}
+
         </div>
       </div>
     </div>

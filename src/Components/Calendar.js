@@ -17,33 +17,7 @@ const Calender = (props) => {
 
   const [dateTime, setDateTime] = useState("");
 
-  useEffect(() => {
-    
-    console.log(props.id)
-    let values = authentication()
-    if(values.authenticated){
-        //GET PROVIDER UID
-        axios.post(`${api}/getProviderUID`, {"handle": props.id})
-        .then(doc => {
-            console.log(doc.data.handle)
-            localStorage.setItem("ProviderUID", doc.data.handle )
-        })
-        .catch(err=>{
-            console.log("SADGE")
-        })
 
-
-        //REQUEST APPOINTMENT
-    }
-
-    setDateTime(
-      `${calDate.year}-${calDate.month}-${calDate.day}T${calTime.hour}:${calTime.minute}:${calTime.second}.000Z`
-    );
-
-    setVariableName(
-      `${calDate.year}-${calDate.month}-${calDate.day},${calTime.hour}:${calTime.minute}`
-    );
-  }, [calDate, calTime]);
 
   return (
     <div className={`${props.className}`}>

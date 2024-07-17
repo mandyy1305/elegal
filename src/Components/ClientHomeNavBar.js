@@ -68,37 +68,7 @@ const ClientHomeNavbar = () => {
           </div>
         </div>
         <div className="account w-1/4 relative h-full  flex justify-center items-center flex-col space-x-8">
-          {!isSideNavOpen && (
-            <FaUser
-              className="text-3xl md:hidden"
-              onClick={() =>
-                setProfileDropdownVisibility(!profileDropdownVisible)
-              }
-            />
-          )}
-          {profileDropdownVisible && (
-            <ProfileDropdown
-              setProfileDropdownVisibility={setProfileDropdownVisibility}
-              profileDropdownVisible={profileDropdownVisible}
-            />
-          )}
-          {!authentication().authenticated && (
-            <Link to="/signin">
-              <div className="signup h-full  md:flex justify-center items-center hidden">
-                <span className="text-md px-4 py-2 border text-white hover:text-black hover:bg-white transition-all delay-75 rounded-xl hover:cursor-pointer hover:-translate-y-0.5">
-                  Sign In / Sign Up
-                </span>
-              </div>
-            </Link>
-          )}
-          {authentication().authenticated && (
-            <FaUser
-              className="text-3xl hidden md:flex"
-              onClick={() =>
-                setProfileDropdownVisibility(!profileDropdownVisible)
-              }
-            />
-          )}
+          
         </div>
       </div>
     </div>

@@ -15,26 +15,7 @@ const RequestAppointment = ({}) => {
   const [subject, setSubject] = useState();
   const [description, setDescription] = useState();
 
-   const handleSubmit=()=>{
-    let values = authentication()
-    const caseDetails = {fullName, mobile, email, subject, description}
-    if(values.authenticated){
-      axios.post(`${api}/requestAppointment`, {"tareek": localStorage.getItem("dateTime"), "providerUID": localStorage.getItem("ProviderUID"), "userUID": values.decodedToken.user_id})
-      .then(()=>{
-        axios.post(`${api}/addCaseDetails`, {caseDetails, "providerUID": localStorage.getItem("ProviderUID"), "userUID": values.decodedToken.user_id} )
-        .then(()=>{
-
-          console.log("success")
-        })
-        .catch(()=>{
-          console.log("sadge")  
-        })
-      })
-      .catch(()=>{
-        console.log("sadge")
-      })
-    }
-   }
+   
 
 
   return (
@@ -148,7 +129,7 @@ const RequestAppointment = ({}) => {
             </div>
           </div>
           <div className="submit bg-hot-blue text-white hover:cursor-pointer w-36 h-8 text-center justify-center items-center flex mt-8"
-          onClick={()=>handleSubmit()}
+
           >
             Submit
           </div>

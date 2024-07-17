@@ -10,123 +10,21 @@ import Calender from "../Calendar";
 import { Link } from "react-router-dom";
 
 const ProvidersDash = () => {
-  let arrPendingName = [];
+
+  // let arrPendingName = [];
   const [arrName, setArrName] = useState("");
-  let arrPendingSubject = [];
-  let arrPendingDescription = [];
+  // let arrPendingSubject = [];
+  // let arrPendingDescription = [];
 
-  let arrAcceptedName = [];
-  let arrAcceptedSubject = [];
-  let arrAcceptedDescription = [];
-  const [requestData, setRequestData] = useState({});
-  const [abc, setAbc] = useState(0);
-  const fetchPendingCases = () => {
-    let values = authentication();
-    if (values.authenticated) {
-      let id = localStorage.getItem("ProviderUID");
-      axios
-        .post(`${api}/fetchPendingRequests`, { providerUID: id })
-        .then((doc) => {
-          //setRequestData(doc.data)
-          // arrPendingName=[]
-          // let arrPendingSubject=[]
-          // let arrPendingDescription=[]
-          //console.log(requestData)
-          for (var i in requestData) {
-            setArrName(requestData[i].caseDetails.fullName);
-            arrPendingName.push(requestData[i].caseDetails.fullName);
-            arrPendingSubject.push(requestData[i].caseDetails.subject);
-            arrPendingDescription.push(requestData[i].caseDetails.description);
-          }
-          // console.log(arrPendingName)
-          // console.log(arrPendingSubject)
-          // console.log(arrPendingDescription)
-          // console.data(requestData)
-        })
-        .catch((err) => {
-          console.log("SADGlE");
-        });
-    } else {
-      console.log("Signed out");
-    }
-  };
-  const fetchAcceptedCases = () => {
-    let values = authentication();
-    if (values.authenticated) {
-      axios
-        .post(`${api}/fetchAcceptedRequests`, {
-          providerUID: localStorage.getItem("ProviderUID"),
-        })
-        .then((doc) => {
-          //setRequestData(doc.data)
-          arrPendingName = [];
-          let arrAcceptedSubject = [];
-          let arrAcceptedDescription = [];
-          for (var i in requestData) {
-            arrAcceptedName.push(requestData[i].caseDetails.fullName);
-            arrAcceptedSubject.push(requestData[i].caseDetails.subject);
-            arrAcceptedDescription.push(requestData[i].caseDetails.description);
-          }
-          console.log("Hello" + arrPendingName);
-          console.log("Hello" + arrPendingSubject);
-          console.log("Hello" + arrPendingDescription);
-          console.data(requestData);
-        })
-        .catch((err) => {
-          console.log("SADGE");
-        });
-    }
-  };
+  // let arrAcceptedName = [];
+  // let arrAcceptedSubject = [];
+  // let arrAcceptedDescription = [];
+  // const [requestData, setRequestData] = useState({});
+  // const [abc, setAbc] = useState(0);
+  
+  
 
-  useEffect(() => {
-    
-
-
-    let values = authentication();
-
-    console.log("Heloooooo");
-    console.log(values)
-    if (values.authenticated) {
-      localStorage.setItem("ProviderUID", values.decodedToken.user_id)
-      let id = localStorage.getItem("ProviderUID");
-      axios
-        .post(`${api}/fetchPendingRequests`, { "providerUID": id })
-        .then((doc) => {
-          //setRequestData(doc.data)
-          console.log(doc.data);
-          localStorage.setItem("requestData", JSON.stringify(doc.data))
-
-        })
-        .catch((err) => {
-
-          console.log("SADGlE");
-        });
-    } else {
-      console.log("Signed out");
-    }
-
-    if (values.authenticated) {
-      //localStorage.setItem("ProviderUID", values.decodedToken.user_id)
-      let id = localStorage.getItem("ProviderUID");
-      axios
-        .post(`${api}/fetchAcceptedRequests`, { "providerUID": id })
-        .then((doc) => {
-          //setRequestData(doc.data)
-          console.log(doc.data);
-          localStorage.setItem("acceptedData", JSON.stringify(doc.data))
-          
-
-        })
-        .catch((err) => {
-
-          console.log("SADGlE");
-        });
-    } else {
-      console.log("Signed out");
-    }
-
-
-  }, []);
+  
 
 
 

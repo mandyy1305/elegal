@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
-import api from "../Authentication/apiAddress";
-
 const Signin = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -14,34 +12,9 @@ const Signin = () => {
   const [cursorLoading, setCursorLoading] = useState(false);
   const [errorObject, setErrorObject] = useState({});
 
-  const handleLogin = (e) => {
-    const userData = {
-      email: email,
-      password: password,
-    };
-
-    axios
-      .post(`${api}/login`, userData)
-      .then((res) => {
-        console.log(res.data);
-        const token = res.data.token; //Manish
-        const FBIdToken = `Bearer ${token}`; //Manish
-        localStorage.setItem("FBIdToken", FBIdToken); //Manish
-        axios.defaults.headers.common["Authorization"] = FBIdToken; //Manish
-
-
-
-
-        setCursorLoading(false);
-        navigate("/");
-        window.location.reload();
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        setErrorObject(err.response.data);
-        setCursorLoading(false);
-      });
-  };
+  // const handleLogin = (e) => {
+    
+  // };
 
   return (
     <div className="h-full w-full flex flex-col relative justify-betwen bg-bluebg rounded-b-3xl rounded-r-3xl">
@@ -49,10 +22,6 @@ const Signin = () => {
         <div></div>
       ) : (
         <div className="error bg-red-600 text-white rounded-sm w-60 flex absolute mb-8 top-0 z-50 left-0 mx-auto right-0 justify-center text-center">
-          {"email" in errorObject && `Email ${errorObject.email}\n`}
-          {"password" in errorObject && `Password ${errorObject.password}`}
-          {"general" in errorObject && `${errorObject.general}`}
-          {"error" in errorObject && `Email or Password doesn't match`}
         </div>
       )}
       <div className="mt-12 text-3xl justify-center flex font-bold text-white">
@@ -99,13 +68,7 @@ const Signin = () => {
               className={`bg-white text-sky-600 text-xl font-bold w-3/12 rounded-md pb-1 ${
                 cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
               }`}
-              onClick={() => {
-                handleLogin();
-                setCursorLoading(true);
-                setTimeout(() => {
-                  setErrorObject({});
-                }, 2000);
-              }}
+              
             />
           </div>
         </form>

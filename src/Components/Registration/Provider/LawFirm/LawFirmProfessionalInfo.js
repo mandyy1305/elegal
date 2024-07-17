@@ -2,34 +2,6 @@ import { useState } from "react";
 
 const LawFirmProfessionalInfo =(props)=>{
     
-    const [yearsOfExperience, setYearsOfExperience] = useState();
-    const [lawFirm, setLawFirm] = useState();
-    const [workLocation, setWorkLocation] = useState();
-    const [typeOfLawyer, setTypeOfLawyer] = useState();
-    const [bio, setBio] = useState();
-
-    const handleYearsOfExperience = (e) => {
-        setYearsOfExperience(e.target.value)
-        localStorage.setItem("providerYearsOfExperience", e.target.value)
-        
-    }
-    const handleLawFirm = (e) => {
-        setLawFirm(e.target.value)
-        localStorage.setItem("providerLawFirm", e.target.value)
-    }
-    const handleWorkLocation = (e) => {
-        setWorkLocation(e.target.value)
-        localStorage.setItem("providerWorkLocation", e.target.value)
-    }
-    const handleTypeOfLawyer = (e) => {
-        setTypeOfLawyer(e.target.value)
-        localStorage.setItem("providerTypeOfLawyer", e.target.value)
-    }
-    const handleBio = (e) => {
-        setBio(e.target.value)
-        localStorage.setItem("providerBio", e.target.value)
-    }
-
 
     return( 
         <div>
@@ -54,8 +26,7 @@ const LawFirmProfessionalInfo =(props)=>{
                                 <div className="title  lg:basis-4/12 basis-1/2"><label className=" text-white font-semibold lg:text-md text-md">Area of Practices :</label></div>
                                 <div className="value basis-6/12">
                                 <input type="text" className="rounded-xl border-2 p-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                                onChange={(e) => handleYearsOfExperience(e)}
-                                value={localStorage.getItem("providerYearsOfExperience")}
+
                                 /></div>
                             </div>
 
@@ -65,8 +36,7 @@ const LawFirmProfessionalInfo =(props)=>{
                                 <div className="title  lg:basis-4/12 basis-1/2"><label className="text-white font-semibold text-md">Work Location:</label></div>
                                 <div className="value basis-6/12">
                                 <input className="rounded-xl border-2 border-slate-700 h-8  w-full float-right sm:h-full "
-                                onChange={(e) => handleWorkLocation(e)}
-                                value={localStorage.getItem("providerWorkLocation")}
+
                                 /></div>
                             </div>
 
@@ -114,15 +84,14 @@ const LawFirmProfessionalInfo =(props)=>{
                                 <div className="title  basis-4/12"><label className="text-white font-semibold text-md">Firm Description :<span className="text-sm font-light">(Brief about your Law Firm):</span><br/></label></div>
                                 <div className="value basis-11/12">
                                 <textarea type="text" className="rounded-xl border-2 border-slate-700 h-32 w-full p-2 sm:h-32 overflow-y-auto  cursor-auto"
-                                onChange={(e) => handleBio(e)}
-                                value={localStorage.getItem("providerBio")}
+
                                 ></textarea></div>
                             </div>
                         </div>
                     </div>
                     <div className="flex justify-center space-x-6  my-2"            >
-                <input onClick={() => props.pfun()} type="button" value="Back" className="bg-gray-300 border-2 border-slate-400 rounded-lg w-24 md:w-24 h-10 text-xl font-extrabold md:mr-20"/>
-                <input type="submit" onClick={() => props.nfun()} value="Next" className="bg-sky-300 border-2 border-slate-400 w-24 h-10 text-xl rounded-lg font-extrabold md:w-24 md:ml-20"/>
+                <input  className="bg-gray-300 border-2 border-slate-400 rounded-lg w-24 md:w-24 h-10 text-xl font-extrabold md:mr-20"/>
+                <input type="submit"  className="bg-sky-300 border-2 border-slate-400 w-24 h-10 text-xl rounded-lg font-extrabold md:w-24 md:ml-20"/>
                 </div>
                 </form>
              </div>   

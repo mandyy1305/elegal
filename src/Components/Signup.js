@@ -17,37 +17,9 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
-      localStorage.setItem("fullnamesignup",fullName);
-    const userData = {
-      fullName: fullName,
-      handle: handle,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-
-    axios
-      .post(`${api}/signup`, userData)
-      .then((res) => {
-        console.log(res.data);
-        const token = res.data.token; //Manish
-        const FBIdToken = `Bearer ${token}`; //Manish
-        localStorage.setItem("FBIdToken", FBIdToken); //Manish
-        axios.defaults.headers.common["Authorization"] = FBIdToken; //Manish
-
-        
-
-        setCursorLoading(false);
-        navigate("/userselection");
-        window.location.reload();
-      })
-      .catch((err) => {
-        setCursorLoading(false);
-        setErrorObject(err.response.data);
-        console.log(err.response.data);
-      });
-  };
+  // const handleSubmit = (e) => {
+    
+  // };
 
   return (
     <div className="h-full w-full bg-bluebg  rounded-b-3xl relative rounded-l-3xl">
@@ -152,13 +124,7 @@ const Signup = () => {
               className={`bg-white text-sky-600 text-xl font-bold w-4/12 md:w-3/12 rounded-md ${
                 cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
               }`}
-              onClick={() => {
-                handleSubmit();
-                setCursorLoading(true);
-                setTimeout(() => {
-                  setErrorObject({});
-                }, 2000);
-              }}
+              
             />
           </div>
         </form>
