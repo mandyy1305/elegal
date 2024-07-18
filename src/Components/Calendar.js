@@ -91,7 +91,7 @@ const Calender = (props) => {
             Object.keys(calTime).length === 0
               ? setNotif("Select a time")
               : navigate("/request-appointment", {
-                  state: { date: calDate, time: calTime },
+                  state: { date: calDate, time: calTime, providerEmail: props.id },
                 });
                 localStorage.setItem("dateTime", dateTime)
             console.log(props.id);

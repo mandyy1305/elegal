@@ -1,13 +1,17 @@
 import axios from "axios";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import api from "../Authentication/apiAddress";
 import authentication from "../Authentication/authentication";
+import { useUser } from "../Authentication/UserProvider";
+import { UploadAppointmentDetails } from "../backend/src/functions";
 
 const RequestAppointment = ({}) => {
   const location = useLocation();
   const data = location.state;
-  console.log(data);
+  const navigate = useNavigate()
+  const currentUser = useUser();
+  const currentEmail = currentUser?.email;
 
   const [fullName, setFullName] = useState();
   const [mobile, setMobile] = useState();
@@ -15,6 +19,18 @@ const RequestAppointment = ({}) => {
   const [subject, setSubject] = useState();
   const [description, setDescription] = useState();
 
+  const handleSubmit=async()=>{
+    
+    const caseDetails = {fullName, mobile, email, subject, description}
+    const providerDeets = data;
+
+    console.log("Case Deets: ", caseDetails);
+    console.log("Provider Deets: ", providerDeets);
+    console.log("Current Email: ", currentEmail);
+
+    await UploadAppointmentDetails(currentEmail, providerDeets, caseDetails);
+    navigate("/")
+   }
    
 
 
@@ -129,7 +145,7 @@ const RequestAppointment = ({}) => {
             </div>
           </div>
           <div className="submit bg-hot-blue text-white hover:cursor-pointer w-36 h-8 text-center justify-center items-center flex mt-8"
-
+onClick={()=>handleSubmit()}
           >
             Submit
           </div>

@@ -9,7 +9,11 @@ import { useEffect, useState } from "react";
 import Calender from "../Calendar";
 import { Link } from "react-router-dom";
 import { useUser } from "../../Authentication/UserProvider";
-import { FetchProviderDetails } from "../../backend/src/functions";
+import { FetchAppointmentDetails, FetchProviderDetails } from "../../backend/src/functions";
+import firebase from "firebase/compat/app";
+
+import "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const ProvidersDash = () => {
   // let arrPendingName = [];
@@ -18,14 +22,36 @@ const ProvidersDash = () => {
 
   const [arrName, setArrName] = useState("");
 
-  useEffect(() => {
-    console.log(currentEmail);
-    const fetch = async () => {
-      const userDeets = await FetchProviderDetails(currentEmail);
-    };
+  const [userDeets, setUserDeets] = useState(null);
+  const [appointmentDeets, setAppointmentDeets] = useState(null);
 
+
+  useEffect(() => {
+    
+    const fetch = async () => {
+
+      console.log(currentEmail);
+      if(currentEmail){
+        if(userDeets == null){
+          setUserDeets(await FetchProviderDetails(currentEmail))
+          console.log("User Details", userDeets)
+        }
+
+        if(appointmentDeets == null){
+          setAppointmentDeets(await FetchAppointmentDetails(currentEmail))
+          console.log("Appointment Details", appointmentDeets);
+        }
+      }
+    };
     fetch();
-  }, []);
+  }, [currentEmail]);
+
+  useEffect(()=>{
+
+
+  }, [appointmentDeets])
+
+
   // let arrPendingSubject = [];
   // let arrPendingDescription = [];
 
@@ -58,7 +84,7 @@ const ProvidersDash = () => {
             />
             <div className="bg-white w-full flex flex-col justify-center">
               <div className=" text-2xl text-center font-bold">
-                Good Day Mr.
+                Good Day Mr. {userDeets? userDeets.details.providerPersonalInfo.providerFullName: ""}
               </div>
               <div className="text-slate-700 text-center text-[15px] font-semibold">
                 Have a Nice Day !
@@ -69,7 +95,11 @@ const ProvidersDash = () => {
             <div className="bg-blue-800 w-full h-12 hidden md:flex rounded-t-lg text-lg font-semibold text-gray-200 p-2 pl-4">
               Profile
             </div>
-            <DashProfile img="https://shorturl.at/uHKT3" />
+            <DashProfile img="https://shorturl.at/uHKT3" 
+            name = {userDeets? userDeets.details.providerPersonalInfo.providerFullName: ""}
+            email = {userDeets? userDeets.details.providerPersonalInfo.providerEmail: ""}
+            num = {userDeets? userDeets.details.providerPersonalInfo.providerContact: ""}
+            />
           </div>
         </div>
         <div className=" h-3/5 py-2 px-3 mx-3 flex flex-col md:flex-row md:justify-evenly md:pr-6">
@@ -80,12 +110,15 @@ const ProvidersDash = () => {
               </div>
             </Link>
             <div className="overflow-auto flex flex-col h-72 scrollbar-hide mt-2">
-              {Object.keys(JSON.parse(localStorage.getItem("requestData"))).map(
-                (key, index) => (
-                  //console.log("key : " + (new Date(JSON.parse(localStorage.getItem("requestData"))[key].date._seconds * 1000 ).toString()))
-                  <DashUpcomingApntmnt img="https://shorturl.at/zQZ03" />
-                )
-              )}
+              {
+                appointmentDeets && Object.keys(appointmentDeets).map((key) => {
+                    const appointment = appointmentDeets[key];
+                    if (!appointment.accepted) {
+                      return <Requests key={key} appointment={appointment} img="https://shorturl.at/zQZ03"/>;
+                    }
+                    return null;
+                  })
+              }
             </div>
           </div>
           <div className=" bg-white mt-4 md:mt-0 rounded-lg shadow-lg shadow-slate-300 md:w-96 ">
@@ -93,63 +126,16 @@ const ProvidersDash = () => {
               Upcoming Appointments
             </div>
             <div className="overflow-auto flex flex-col h-72 scrollbar-hide mt-2">
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name={arrName[0]}
-                case="Molestation Case"
-                date="30 Sept 2023"
-                time="2:00 PM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name="Aayush Patanayak"
-                case="Divorse Case"
-                date="12 Aug 2023"
-                time="10:00 AM"
-              />
-
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/mO026"
-                name="Sarvochcha Sharma"
-                case="Murder Case"
-                date="10 Dec 2023"
-                time="1:00 PM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name="Anurag Bhushan"
-                case="Smuggling Case"
-                date="12 Oct 2023"
-                time="4:00 PM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name="Divyansh Yaduvanshi"
-                case="Molestation Case"
-                date="30 Sept 2023"
-                time="2:00 PM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name="Aayush Patanayak"
-                case="Divorse Case"
-                date="12 Aug 2023"
-                time="10:00 AM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/mO026"
-                name="Sarvochcha Sharma"
-                case="Murder Case"
-                date="10 Dec 2023"
-                time="1:00 PM"
-              />
-              <DashUpcomingApntmnt
-                img="https://shorturl.at/zQZ03"
-                name="Anurag Bhushan"
-                case="Smuggling Case"
-                date="12 Oct 2023"
-                time="4:00 PM"
-              />
+            {
+                appointmentDeets && Object.keys(appointmentDeets).map((key) => {
+                    const appointment = appointmentDeets[key];
+                    if (appointment.accepted) {
+                      return <DashUpcomingApntmnt key={key} appointment={appointment} img="https://shorturl.at/zQZ03"/>;
+                    }
+                    return null;
+                  })
+              }
+              
             </div>
           </div>
           <div className="rounded-lg shadow-lg shadow-slate-300 md:w-96">

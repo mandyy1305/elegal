@@ -116,7 +116,7 @@ function App() {
         <Route path="/providerRegister" element={<RegisterProvider />} />
         <Route path="/Appointment" element={<Appointment />} />
         <Route path="/AppRequest" element={<AppointmentRequest />} />
-        <Route path="/AppHistory" element={<AppointmentHistory />} />
+        <Route path="/AppHistory" element={<Appointment />} />
         <Route path="/UserSelection" element={<UserSelection />} />
         <Route path="/clientRegister" element={<Registerclient />} />
         <Route path="/LawFirmRegister" element={<RegisterLawFirm />} />

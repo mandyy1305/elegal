@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {ImCross} from 'react-icons/im';
+import { formatDate, formatTime } from '../../backend/src/gloabalValues';
 const AppointmentUpcoming =(props)=>{
     return(
             <div className="h-full  w-full flex lg:flex-row-reverse flex-col-reverse">
@@ -15,11 +16,11 @@ const AppointmentUpcoming =(props)=>{
                     </div>
                 </div>
                 <div className="bg-white w-7/12 h-auto flex flex-col justify-center pl-1 lg:pl-4">
-                    <div className="h-1/4 flex items-center text-blue-950 font-semibold lg:font-bold text-[16px] lg:text-2xl">{props.name}</div>
+                    <div className="h-1/4 flex items-center text-blue-950 font-semibold lg:font-bold text-[16px] lg:text-2xl">{props.appointment.caseDetails.fullName}</div>
                     <div className=" text-sm lg:text-xs lg:mb-1">{props.case}</div>  
-                    <p className=" text-xs font-bold pt-2" onClick={()=>{props.fun()}}>Case Description<br/></p>   
+                    <p className=" text-xs font-bold pt-2">Case Description<br/></p>   
                         <div className="h-auto overflow-hidden lg:flex flex-col  hidden">
-                            <p className="h-auto text-sm flex pt-2">{props.descript}</p>
+                            <p className="h-auto text-sm flex pt-2">{props.appointment.caseDetails.description}</p>
                         </div> 
                     </div>
                 <div className="w-0 lg:w-2/12"></div>
@@ -27,8 +28,8 @@ const AppointmentUpcoming =(props)=>{
                 <div className="h-3/4 lg:h-1/4 p-1">
                     <div className="bg-blue-700 w-full lg:w-11/12 h-full mx-auto justify-center flex items-center  text-xs lg:text-lg font-semibold text-white rounded-md float-left">UPCOMING</div>
                 </div>
-                    <div className=" h-1/4 flex items-end font-extrabold lg:font-bold text-xs lg:text-lg lg:pl-4 pl-1">{props.date}</div>
-                    <div className=" h-1/4 font-bold text-sm lg:text-lg lg:pl-4 pl-1">{props.time}</div>
+                    <div className=" h-1/4 flex items-end font-extrabold lg:font-bold text-xs lg:text-lg lg:pl-4 pl-1">{formatDate(props.appointment.timeSlot.date)}</div>
+                    <div className=" h-1/4 font-bold text-sm lg:text-lg lg:pl-4 pl-1">{formatTime(props.appointment.timeSlot.time)}</div>
                 </div>
                 </div>
             </div>
