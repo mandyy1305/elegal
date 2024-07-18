@@ -27,8 +27,8 @@ const Signup = () => {
         const user = userCredential.user;
         console.log(user);
 
-        SignUpUsername(handle);
-        
+        SignUpUsername(handle, email);
+
         navigate("/userselection");
       })
       .catch((error) => {

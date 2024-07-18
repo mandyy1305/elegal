@@ -3,9 +3,80 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../../Authentication/apiAddress";
 import jwtDecode from "jwt-decode";
+import { UploadClientDetails } from "../../../backend/src/functions";
+import { useUser } from "../../../Authentication/UserProvider";
 
 const Registerclient = () => {
+  const currentUser = useUser();
+  const currentEmail = currentUser?.email;
 
+  const [fullName, setFullName] = useState();
+  const [contact, setContact] = useState();
+  const [email, setEmail] = useState();
+  const [dob, setDob] = useState();
+  const [languages, setLanguages] = useState();
+  const [gender, setGender] = useState();
+  const [address, setAddress] = useState();
+
+  const [cursorLoading, setCursorLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleFullName = (e) => {
+    setFullName(e.target.value);
+    localStorage.setItem("clientFullName", e.target.value);
+  };
+  const handleContact = (e) => {
+    setContact(e.target.value);
+    localStorage.setItem("clientContact", e.target.value);
+  };
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    localStorage.setItem("clientEmail", e.target.value);
+  };
+  const handleDob = (e) => {
+    setDob(e.target.value);
+    localStorage.setItem("clientDob", e.target.value);
+  };
+  const handleLanguages = (e) => {
+    setLanguages(e.target.value);
+    localStorage.setItem("clientLanguages", e.target.value);
+  };
+  const handleGender = (e) => {
+    setGender(e.target.value);
+    localStorage.setItem("clientGender", e.target.value);
+  };
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+    localStorage.setItem("clientAddress", e.target.value);
+  };
+
+  const handleSubmitDetails = async () => {
+    let clientPersonalInfo = {
+      clientFullName: localStorage.getItem("clientFullName"),
+      clientContact: localStorage.getItem("clientContact"),
+      clientEmail: localStorage.getItem("clientEmail"),
+      clientDob: localStorage.getItem("clientDob"),
+      clientLanguages: localStorage.getItem("clientLanguages"),
+      clientGender: localStorage.getItem("clientGender"),
+      clientAddress: localStorage.getItem("clientAddress"),
+    };
+
+    await UploadClientDetails(clientPersonalInfo, currentEmail);
+    deleteLocalStorage();
+  };
+
+  const deleteLocalStorage = () => {
+    localStorage.removeItem("clientFullName");
+    localStorage.removeItem("clientContact");
+    localStorage.removeItem("clientEmail");
+    localStorage.removeItem("clientDob");
+    localStorage.removeItem("clientLanguages");
+    localStorage.removeItem("clientGender");
+    localStorage.removeItem("clientAddress");
+
+    localStorage.removeItem("clientOrProvider");
+    localStorage.removeItem("typeOfProvider");
+  };
 
   return (
     <div className="w-full h-full">
@@ -25,6 +96,7 @@ const Registerclient = () => {
                 <div className="value basis-7/12 ">
                   <input
                     className="rounded-md border-2 p-2 border-slate-700 h-8  sm:h-full w-full float-right"
+                    onChange={(e) => handleFullName(e)}
                   />
                 </div>
               </div>
@@ -40,6 +112,7 @@ const Registerclient = () => {
                     type="number"
                     pattern="[0-9]{10}"
                     className="rounded-md border-2 p-2 border-slate-700 h-8  w-full float-right sm:h-full "
+                    onChange={(e) => handleContact(e)}
                   />
                 </div>
               </div>
@@ -54,6 +127,7 @@ const Registerclient = () => {
                   <input
                     type="email"
                     className="rounded-md border-2 p-2 border-slate-700 h-8  w-full float-right sm:h-full "
+                    onChange={(e) => handleEmail(e)}
                   />
                 </div>
               </div>
@@ -68,7 +142,7 @@ const Registerclient = () => {
                   <input
                     type="date"
                     className="rounded-md p-2 border-2 border-slate-700 h-8  w-full float-right sm:h-full "
-
+                    onChange={(e) => handleDob(e)}
                   />
                 </div>
               </div>
@@ -82,6 +156,7 @@ const Registerclient = () => {
                 <div className="value  basis-7/12 py-3 sm:py-0">
                   <input
                     className="rounded-md p-2 border-2 border-slate-700 h-8  w-full float-right sm:h-full"
+                    onChange={(e) => handleLanguages(e)}
                   />
                 </div>
               </div>
@@ -95,7 +170,7 @@ const Registerclient = () => {
                 <div className="value  basis-7/12">
                   <select
                     className="rounded-md border-2 pl-2 border-slate-700 h-8  w-full float-right sm:h-full "
-
+                    onChange={(e) => handleGender(e)}
                   >
                     <option value="Gender">Gender</option>
                     <option value="Male">Male</option>
@@ -114,6 +189,7 @@ const Registerclient = () => {
                 <div className="value basis-7/12">
                   <textarea
                     className="rounded-md border-2 pl-2 border-slate-700 h-8 w-full float-right  sm:h-20 overflow-auto"
+                    onChange={(e) => handleAddress(e)}
                   />
                 </div>
               </div>
@@ -139,7 +215,6 @@ const Registerclient = () => {
                 name="upploadbtn"
                 accept="image/*"
                 className="hidden"
-
               />
             </div>
           </div>
@@ -155,6 +230,9 @@ const Registerclient = () => {
               type="button"
               value="Register"
               className={`bg-[#00183C] text-white w-5/12 h-10 text-xl font-bold md:w-24 md:ml-20 rounded-lg `}
+              onClick={() => {
+                handleSubmitDetails();
+              }}
             />
           </div>
         </form>

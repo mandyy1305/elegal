@@ -8,10 +8,24 @@ import api from "../../Authentication/apiAddress";
 import { useEffect, useState } from "react";
 import Calender from "../Calendar";
 import { Link } from "react-router-dom";
+import { useUser } from "../../Authentication/UserProvider";
+import { FetchProviderDetails } from "../../backend/src/functions";
 
 const ProvidersDash = () => {
   // let arrPendingName = [];
+  const currentUser = useUser();
+  const currentEmail = currentUser?.email;
+
   const [arrName, setArrName] = useState("");
+
+  useEffect(() => {
+    console.log(currentEmail);
+    const fetch = async () => {
+      const userDeets = await FetchProviderDetails(currentEmail);
+    };
+
+    fetch();
+  }, []);
   // let arrPendingSubject = [];
   // let arrPendingDescription = [];
 
