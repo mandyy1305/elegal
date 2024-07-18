@@ -4,7 +4,11 @@ const ServiceProviderCard = (props) => {
   return (
     <div className="card  w-80 lg:w-full h-96 lg:h-56 flex flex-col lg:flex-row bg-white border border-slate-300 rounded-xl lg:items-center">
       <div className="img w-full lg:w-1/5 h-40  flex justify-center">
-        <img src={props.imgUrl} alt="" className="rounded-full h-full p-2" />
+        <img
+          src="https://www.svgrepo.com/show/453446/account.svg"
+          alt=""
+          className="rounded-full h-full p-2"
+        />
       </div>
       <div className="details flex flex-col lg:w-1/2 lg:px-8 w-full">
         <div className="name text-card-btn text-xl font-bold flex w-full px-2  justify-center lg:justify-start">

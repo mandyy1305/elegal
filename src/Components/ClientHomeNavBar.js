@@ -56,36 +56,35 @@ const ClientHomeNavbar = () => {
             </div>
           </Link>
           <div className="hover:border-b-2 hover:cursor-pointer px-4 py-2">
-            NAV1
+            Services
           </div>
           <div className="hover:border-b-2 hover:cursor-pointer px-4 py-2">
-            NAV1
+            About Us
           </div>
           <div className="hover:border-b-2 hover:cursor-pointer px-4 py-2">
-            NAV1
-          </div>
-          <div className="hover:border-b-2 hover:cursor-pointer px-4 py-2">
-            NAV1
+            Contact
           </div>
         </div>
-        <div className="account w-1/4 relative h-full  flex justify-center items-center flex-col">
+        <div className="account w-1/4 relative h-full  flex justify-center items-center">
           <Link
             to="/signin"
-            className="border-2 rounded-full w-24 flex justify-center"
+            className="border-2 mr-3 rounded-lg w-24 text-black bg-white h-8 flex justify-center"
           >
             Sign In
           </Link>
-          <button
-            className="border-2 rounded-full w-24"
-            onClick={() => {
-              const auth = getAuth();
-              signOut(auth).then(() => {
-                console.log("Signed Out");
-              });
-            }}
-          >
-            Log Out
-          </button>
+          <Link to="/">
+            <button
+              className=" bg-red-500 rounded-lg h-8 w-24"
+              onClick={() => {
+                const auth = getAuth();
+                signOut(auth).then(() => {
+                  console.log("Signed Out");
+                });
+              }}
+            >
+              Log Out
+            </button>
+          </Link>
         </div>
       </div>
     </div>

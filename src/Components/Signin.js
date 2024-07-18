@@ -74,18 +74,37 @@ const Signin = () => {
               </Link>
             </div>
           </div>
-          <div className="flex justify-center mt-12 h-10">
-            <input
-              type="button"
-              value="Sign In"
-              className={`bg-white text-sky-600 text-xl font-bold w-3/12 rounded-md pb-1 h-8 mb-4 ${
-                cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
-              }`}
-              onClick={() => {
-                // setCursorLoading(true);
-                handleSignIn();
-              }}
-            />
+          <div className="flex w-full justify-center gap-16">
+            <Link to="/">
+              <div className="flex justify-center mt-12 h-10">
+                <input
+                  type="button"
+                  value="Sign In"
+                  className={`bg-white text-sky-600 text-xl font-bold w-fit px-4 rounded-md pb-1 h-8 mb-4 ${
+                    cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
+                  }`}
+                  onClick={() => {
+                    // setCursorLoading(true);
+                    handleSignIn();
+                  }}
+                />
+              </div>
+            </Link>
+            <Link to="/signup">
+              <div className="flex justify-center mt-12 h-10">
+                <input
+                  type="button"
+                  value="Sign Up"
+                  className={`bg-white text-sky-600 text-xl font-bold w-fit px-4 rounded-md pb-1 h-8 mb-4 ${
+                    cursorLoading ? "hover:cursor-wait" : "hover:cursor-pointer"
+                  }`}
+                  onClick={() => {
+                    // setCursorLoading(true);
+                    handleSignIn();
+                  }}
+                />
+              </div>
+            </Link>
           </div>
         </form>
       </div>

@@ -9,7 +9,7 @@ import { UploadAppointmentDetails } from "../backend/src/functions";
 const RequestAppointment = ({}) => {
   const location = useLocation();
   const data = location.state;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const currentUser = useUser();
   const currentEmail = currentUser?.email;
 
@@ -19,9 +19,8 @@ const RequestAppointment = ({}) => {
   const [subject, setSubject] = useState();
   const [description, setDescription] = useState();
 
-  const handleSubmit=async()=>{
-    
-    const caseDetails = {fullName, mobile, email, subject, description}
+  const handleSubmit = async () => {
+    const caseDetails = { fullName, mobile, email, subject, description };
     const providerDeets = data;
 
     console.log("Case Deets: ", caseDetails);
@@ -29,10 +28,8 @@ const RequestAppointment = ({}) => {
     console.log("Current Email: ", currentEmail);
 
     await UploadAppointmentDetails(currentEmail, providerDeets, caseDetails);
-    navigate("/")
-   }
-   
-
+    navigate("/");
+  };
 
   return (
     <div className="flex flex-row w-full max-w-screen-2xl  justify-evenly self-center mt-16">
@@ -61,7 +58,7 @@ const RequestAppointment = ({}) => {
           </div>
           <div className="details flex flex-col lg:px-8 w-2/3 justify-center">
             <div className="name text-card-btn text-xl font-bold flex w-full px-2  justify-center lg:justify-start">
-              Adv. Himanshu Yadav
+              Adv. Sarvoch Sharma
             </div>
             <div className="specialise font-bold text-center lg:text-left flex w-full justify-center lg:justify-start text-md px-2 mt-2">{`Specialises in Personal Injury`}</div>
             <div className="experience px-2 flex w-full justify-center lg:justify-start text-md">{`6.9 years of experience`}</div>
@@ -144,8 +141,9 @@ const RequestAppointment = ({}) => {
               />
             </div>
           </div>
-          <div className="submit bg-hot-blue text-white hover:cursor-pointer w-36 h-8 text-center justify-center items-center flex mt-8"
-onClick={()=>handleSubmit()}
+          <div
+            className="submit bg-hot-blue text-white hover:cursor-pointer w-36 h-8 text-center justify-center items-center flex mt-8"
+            onClick={() => handleSubmit()}
           >
             Submit
           </div>
