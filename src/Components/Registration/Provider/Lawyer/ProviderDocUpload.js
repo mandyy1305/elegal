@@ -46,7 +46,7 @@ const ProviderDocUpload =(props)=>{
                         </div>
                     </div>
                     <div className="flex justify-center space-x-6  my-2">
-                <input  type="reset" value="Back" className="bg-gray-300 border-2 border-slate-400 rounded-lg w-5/12 md:w-3/12 h-10 text-xl font-extrabold"/>
+                <input  type="reset" onClick={() => props.pfun()} value="Back" className="bg-gray-300 border-2 border-slate-400 rounded-lg w-5/12 md:w-3/12 h-10 text-xl font-extrabold"/>
                 <input type="button"  value="Submit" className="bg-sky-300 border-2 border-slate-400 w-5/12 h-10 text-xl rounded-lg font-extrabold md:w-3/12"/>
                 </div>
                 </form>

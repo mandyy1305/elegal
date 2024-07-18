@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../Authentication/apiAddress";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { SignUpUsername } from "../backend/src/functions";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -26,8 +27,9 @@ const Signup = () => {
         const user = userCredential.user;
         console.log(user);
 
-        // TODO: Add username to the database
-        navigate("/");
+        SignUpUsername(handle);
+        
+        navigate("/userselection");
       })
       .catch((error) => {
         const errorCode = error.code;
