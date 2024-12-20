@@ -8,13 +8,13 @@ This repository contains the code for the **eLegal** platform, built with **Reac
 
 ## Table of Contents
 
-- [About eLegal](about-elegal)
-- [Features](features)
-- [Tech Stack](tech-stack)
-- [Setup](setup)
-- [How to Use](how-to-use)
-- [Contributing](contributing)
-- [License](license)
+- [About eLegal](#About-eLegal)
+- [Features](#Features)
+- [Tech Stack](#Tech-Stack)
+- [Setup](#Setup)
+- [How to Use](#How-To-Use)
+- [Contributing](#Contributing)
+- [License](#License)
 
 ---
 
