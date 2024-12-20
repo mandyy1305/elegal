@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# eLegal - Connecting Legal Service Providers with Clients
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**eLegal** is an innovative web application designed to bridge the gap between legal service providers and citizens in need of legal aid. The platform helps clients easily find and schedule their first legal consultation with the right provider based on their needs, budget, and location.
 
-## Available Scripts
+This repository contains the code for the **eLegal** platform, built with **React** for a seamless, interactive user experience.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [About eLegal](about-elegal)
+- [Features](features)
+- [Tech Stack](tech-stack)
+- [Setup](setup)
+- [How to Use](how-to-use)
+- [Contributing](contributing)
+- [License](license)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## About eLegal
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**eLegal** is an online platform aimed at making legal services accessible to all citizens in India. The platform connects legal service providers (advocates, notaries, arbitrators, etc.) with clients seeking legal advice or assistance. 
 
-### `npm run build`
+Key functionalities include:
+- Appointment scheduling for first-time consultations.
+- A pro-bono feature for clients who cannot afford standard legal services.
+- A "first come, first served" system for case assignments to increase transparency and competition among providers.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **User Registration**: Sign up as a client or a legal service provider.
+- **Client Features**:
+  - Search for providers based on case type and affordability.
+  - Request appointments with specific providers or through the "first come, first served" model.
+  - Pro-bono options for clients who cannot afford legal services.
+- **Provider Features**:
+  - Accept or reject client appointment requests.
+  - View nearby case requests for better visibility, especially for new or less established providers.
+  - Dashboard for managing appointments and available time slots.
+- **Transparency**: Clear categorization of services and affordability options.
+- **Security**: Secure user authentication and data protection.
+  
+---
 
-### `npm run eject`
+## Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Frontend**:
+  - React.js
+  - CSS/SCSS (for styling)
+  
+- **Backend** (Optional if you have backend functionality):
+  - Node.js / Express.js
+  - Firebase for database
+  
+- **Other Tools**:
+  - JWT (JSON Web Tokens) for authentication
+  - Axios (for API requests)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run the project locally, follow these steps:
 
-## Learn More
+### Prerequisites
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (for running JavaScript outside of a browser)
+- [npm](https://www.npmjs.com/) (for dependency management)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Clone the repository
+```bash
+git clone https://github.com/mandyy1305/elegal.git
+cd elegal
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Install dependencies
+Using npm:
+```bash
+npm install
+```
 
-### Code Splitting
+### Start the development server
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app should now be running at [http://localhost:3000](http://localhost:3000).
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## How to Use
 
-### Making a Progressive Web App
+### Client
+1. **Sign Up/Login**: Register an account as a client.
+2. **Search Providers**: Browse legal service providers based on the case type and affordability.
+3. **Request Appointment**: Send a request to a provider for a consultation or use the "first come, first served" option.
+4. **Pro-bono**: If you cannot afford a provider, request pro-bono services.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Provider
+1. **Sign Up/Login**: Register an account as a legal service provider.
+2. **Manage Appointments**: Accept or reject client requests based on your availability.
+3. **Nearby Requests**: View nearby cases that you can respond to on a first-come-first-served basis.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contributing
 
-### Deployment
+We welcome contributions to improve **eLegal**! If you'd like to help out, please follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Fork the repository.
+2. Clone your fork: `git clone https://github.com/mandyy1305/elegal.git`
+3. Create a new branch: `git checkout -b feature/your-feature`
+4. Make your changes and commit them: `git commit -m "Add feature"`
+5. Push to your fork: `git push origin feature/your-feature`
+6. Open a pull request with a description of your changes.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
